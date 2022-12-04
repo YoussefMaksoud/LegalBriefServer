@@ -5,9 +5,11 @@ const express = require("express");
 var mysql = require('mysql');
 var cors = require('cors');
 
-const PORT = process.env.PORT || 3002;
+//const PORT = process.env.PORT || 3002;
 
 const app = express();
+
+app.set('port', process.env.PORT || 3000)
 
 app.use(cors());
 
@@ -67,7 +69,4 @@ app.get("/nextOptionSet/:id", (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-
-    console.log(`Server listening on ${PORT}`);
-});
+app.listen(process.env.PORT || 3000);
