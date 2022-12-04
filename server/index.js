@@ -10,6 +10,7 @@ const app = express();
 
 var con = mysql.createConnection({
     host: "us-cdbr-east-06.cleardb.net",
+    port: '3006',
     user: "bca689b78c2bfe",
     password: "b056ac87",
     database: "legaltree"
