@@ -4,15 +4,15 @@ const { json } = require("express");
 const express = require("express");
 var mysql = require('mysql');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3006;
 
 const app = express();
 
 var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "password",
-    database: "legalbrief"
+    host: "us-cdbr-east-06.cleardb.net",
+    user: "bca689b78c2bfe",
+    password: "b056ac87",
+    database: "legaltree"
 });
 
 con.connect(function(err){
