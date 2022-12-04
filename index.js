@@ -4,7 +4,7 @@ const { json } = require("express");
 const express = require("express");
 var mysql = require('mysql');
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3002;
 
 const app = express();
 
@@ -36,31 +36,31 @@ con.connect(function(err){
 //     }
 // })
 
-app.get("/optionsInitial", (req, res) => {
-    console.log("reading table");
-    con.query("SELECT * FROM legaltree WHERE parent_name = 'none'", (err, rows, fields) => {
-        if(err){
-            console.log(err);
-        }else{
-            res.json({message: rows});
-        }
-    });
-});
+// app.get("/optionsInitial", (req, res) => {
+//     console.log("reading table");
+//     con.query("SELECT * FROM heroku_4048796efb1faa6.legaltree WHERE parent = 'none'", (err, rows, fields) => {
+//         if(err){
+//             console.log(err);
+//         }else{
+//             res.json({message: rows});
+//         }
+//     });
+// });
 
-app.get("/nextOptionSet/:id", (req, res) => {
-    var parent = req.params.id;
-    var requestString = "SELECT * FROM legaltree WHERE parent_name = '" + parent + "'";
-    console.log(requestString);
-    con.query(requestString, (err, rows, fields) => {
-        if(err){
-            console.log(err);
-        }else{
-            res.json({message: rows});
-        }
-    });
-});
+// app.get("/nextOptionSet/:id", (req, res) => {
+//     var parent = req.params.id;
+//     var requestString = "SELECT * FROM heroku_4048796efb1faa6.legaltree WHERE parent = '" + parent + "'";
+//     console.log(requestString);
+//     con.query(requestString, (err, rows, fields) => {
+//         if(err){
+//             console.log(err);
+//         }else{
+//             res.json({message: rows});
+//         }
+//     });
+// });
 
-app.listen(PORT, () => {
+// app.listen(PORT, () => {
 
-    console.log(`Server listening on ${PORT}`);
-});
+//     console.log(`Server listening on ${PORT}`);
+// });
