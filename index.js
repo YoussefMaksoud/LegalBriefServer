@@ -10,10 +10,14 @@ const app = express();
 
 var con = mysql.createConnection({
     host: "us-cdbr-east-06.cleardb.net",
-    port: '3006',
     user: "bca689b78c2bfe",
     password: "b056ac87",
-    database: "legaltree"
+    database: "heroku_4048796efb1faa6"
+
+    // host: "localhost",
+    // user: "root",
+    // password: "password",
+    // database: "legalbrief"
 });
 
 con.connect(function(err){
@@ -36,31 +40,31 @@ con.connect(function(err){
 //     }
 // })
 
-// app.get("/optionsInitial", (req, res) => {
-//     console.log("reading table");
-//     con.query("SELECT * FROM heroku_4048796efb1faa6.legaltree WHERE parent = 'none'", (err, rows, fields) => {
-//         if(err){
-//             console.log(err);
-//         }else{
-//             res.json({message: rows});
-//         }
-//     });
-// });
+app.get("/optionsInitial", (req, res) => {
+    console.log("reading table");
+    con.query("SELECT * FROM legaltree WHERE parent = 'none'", (err, rows, fields) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.json({message: rows});
+        }
+    });
+});
 
-// app.get("/nextOptionSet/:id", (req, res) => {
-//     var parent = req.params.id;
-//     var requestString = "SELECT * FROM heroku_4048796efb1faa6.legaltree WHERE parent = '" + parent + "'";
-//     console.log(requestString);
-//     con.query(requestString, (err, rows, fields) => {
-//         if(err){
-//             console.log(err);
-//         }else{
-//             res.json({message: rows});
-//         }
-//     });
-// });
+app.get("/nextOptionSet/:id", (req, res) => {
+    var parent = req.params.id;
+    var requestString = "SELECT * FROM legaltree WHERE parent = '" + parent + "'";
+    console.log(requestString);
+    con.query(requestString, (err, rows, fields) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.json({message: rows});
+        }
+    });
+});
 
-// app.listen(PORT, () => {
+app.listen(PORT, () => {
 
-//     console.log(`Server listening on ${PORT}`);
-// });
+    console.log(`Server listening on ${PORT}`);
+});
