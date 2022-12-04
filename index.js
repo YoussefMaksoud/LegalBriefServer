@@ -3,10 +3,13 @@
 const { json } = require("express");
 const express = require("express");
 var mysql = require('mysql');
+var cors = require('cors');
 
 const PORT = process.env.PORT || 3002;
 
 const app = express();
+
+app.use(cors());
 
 var con = mysql.createConnection({
     host: "us-cdbr-east-06.cleardb.net",
