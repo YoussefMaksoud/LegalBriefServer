@@ -22,7 +22,13 @@ var con = mysql.createConnection({
     host: "us-cdbr-east-06.cleardb.net",
     user: "bca689b78c2bfe",
     password: "b056ac87",
-    database: "heroku_4048796efb1faa6"
+    database: "heroku_4048796efb1faa6",
+    connectTimeout : 60000000000,
+    pool: {
+        max: 10,
+        min: 0,
+        idleTimeoutMillis: 100
+    }
 
     // host: "localhost",
     // user: "root",
@@ -30,10 +36,22 @@ var con = mysql.createConnection({
     // database: "legalbrief"
 });
 
-con.connect(function(err){
-    if(err) throw err;
-    console.log("Connected to LegalBrief Database running on ");
+let pool = mysql.createPool(con);
+
+pool.on('connection', function (_conn) {
+    if (_conn) {
+        logger.info('Connected the database via threadId %d!!', _conn.threadId);
+        console.log('Connected the database via threadId %d!!', _conn.threadId);
+        _conn.query('SET SESSION auto_increment_increment=1');
+    }
 });
+
+/******************************************************************* */
+// con.connect(function(err){
+//     if(err) throw err;
+//     console.log("Connected to LegalBrief Database running on ");
+// });
+/******************************************************************* */
 
 // con.on("connect", err => {
 //     if(err){
